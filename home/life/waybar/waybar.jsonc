@@ -1,0 +1,45 @@
+{
+  "layer": "top",
+  "position": "top",
+  "exclusive": true,
+  "height": 32,
+  "modules-left": ["custom/launcher", "hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["hyprland/submap", "custom/wallpaper", "network", "battery"],
+  "clock": {
+    "interval": 1,
+    "format": "{:%I:%M %p  %A %b %d}",
+    "tooltip": true,
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+  },
+  "network": {
+    "interval": 1,
+    "format-wifi": "󰖩 {essid}",
+    "format-ethernet": "󰀂  {ifname}",
+    "format-linked": "󰖪 {essid} (No IP)",
+    "format-disconnected": "󰯡 Disconnected",
+    "tooltip": true,
+    "tooltip-format-wifi": "<big>{essid}  {signalStrength}%</big>\n{ipaddr}@{ifname}\n  {bandwidthDownBytes}\n  {bandwidthUpBytes}",
+  },
+  "custom/launcher": {
+    "format": " ",
+    "on-click": "pkill rofi || rofi -show drun",
+    "tooltip": false,
+  },
+  "custom/wallpaper": {
+    "format": "󰆧 ",
+    "on-click": "awww img $(find ${WALLPAPERS} -type f | shuf -n 1)",
+    "tooltip": false,
+  },
+  "hyprland/submap": {
+    "format": "{}",
+    "max-length": 16,
+    "tooltip": false,
+  },
+  "battery": {
+    "format": " {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-charging": "󰂄 {capacity}%",
+    "tooltip": true,
+  },
+}

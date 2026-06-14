@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+
+# record files changed
+DIR=$(dirname "$(readlink -f "$0")")
+REC="${DIR}/.mkchg.rec"
+
+declare -A rec
+
+if test -f "$REC"; then
+  source "$REC"
+fi
+
+function list {
+  if [ -z "${!rec[@]}" ]; then
+    echo "empty"
+    return 0
+  fi
+
+  for k in "${!rec[@]}" ; do
+    echo "$k => ${rec[$k]}"
+  done
+}
+
+function add {
+  local t=$(realpath -s "$1")
+  if ! test -L "$t"; then
+    echo "error $t is not a symlink"
+    return 1
+  fi
+
+  # the original symlink
+  local f=$(readlink "$t")
+  rm -f "$t"
+  cp -r --no-preserve=mode "$f" "$t"
+
+  rec["$t"]="$f"
+  echo "add $t"
+}
+
+function reset {
+  local t=$(realpath -s "$1")
+  if [[ ! ${rec["$t"]+_} ]]; then
+    echo "error $t is not in the record"
+    return 1
+  fi
+
+  local f=${rec["$t"]}
+  rm -f "$t"
+  ln -s "$f" "$t"
+  echo "link $f -> $t"
+  unset rec["$t"]
+}
+
+function reset_all {
+  for t in "${!rec[@]}" ; do
+    local f=${rec["$t"]}
+    rm -f "$t"
+    ln -s "$f" "$t"
+    echo "link $f -> $t"
+  done
+}
+
+function record {
+  echo "#!/usr/bin/env bash" > "$REC"
+  echo "declare -A rec" >> "$REC"
+
+  for t in "${!rec[@]}" ; do
+    local f=${rec["$t"]}
+    echo "rec[\"$t\"]=\"$f\"" >> "$REC"
+  done
+}
+
+function usage {
+  echo "Usage: $0 [OPTION]... [--] [FILE]..."
+  echo "A small utility to temporarily replace symlinks with real files,"
+  echo "allowing local modifications, and later restore the original symlinks."
+  echo ""
+  echo "Arguments:"
+  echo "  -h, --help      print this help, then exit"
+  echo "  -l, --list      list all changed files, then exit"
+  echo "  -a, --add       add files to be copied [default]"
+  echo "  -r, --reset     reset file and recover symlinks"
+  echo "  -R, --reset-all do reset for all files changed"
+  echo "if there are lots of options, the last one will be used"
+}
+
+ACTION="add"
+OPTIONS=$(getopt -o hlarR -l help,list,add,reset,reset-all -- "$@")
+if [ $? -ne 0 ]; then
+  usage && exit 0
+fi
+
+eval set -- "$OPTIONS"
+
+while true; do
+  case "$1" in
+    -h | --help) usage && exit 0 ;;
+    -l | --list) ACTION="list"; shift ;;
+    -a | --add) ACTION="add" ; shift ;;
+    -r | --reset) ACTION="reset" ; shift ;;
+    -R | --reset-all) ACTION="reset_all" ; shift ;;
+    --) shift ; break ;;
+    *) exit 1 ;;
+  esac
+done
+
+# handlers
+
+case "$ACTION" in
+  "list")
+    list
+    exit 0
+    ;;
+  "add")
+    for f in "$@"; do
+      add "$f"
+    done
+    record
+    exit 0
+    ;;
+  "reset")
+    for f in "$@"; do
+      reset "$f"
+    done
+    record
+    exit 0
+    ;;
+  "reset_all")
+    if [ -z "${!rec[@]}" ]; then
+      echo "empty"
+      exit 0
+    fi
+    reset_all
+    rm -f "$REC"
+    exit 0
+    ;;
+esac
+
