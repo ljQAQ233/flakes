@@ -41,7 +41,7 @@ in
   imports = [
     ./zsh.nix
     ./life/life.nix
-    ./devel/clash.nix
+    ./devel/agent.nix
     ./devel/devel.nix
   ];
 
@@ -55,7 +55,6 @@ in
     qq
     zip
     ffmpeg
-    opencode
     wf-recorder
   ];
 
