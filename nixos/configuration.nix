@@ -161,8 +161,6 @@
       rofi
       yazi
       kitty
-      distrobox
-      podman
       clash-verge-rev
     ];
     sessionVariables = {
