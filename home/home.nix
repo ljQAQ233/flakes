@@ -58,6 +58,8 @@ in
     wf-recorder
   ];
 
+  services.kd.enable = true;
+
   programs.obs-studio = {
     enable = true;
     plugins = [ ];
