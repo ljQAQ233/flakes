@@ -41,14 +41,9 @@
         gh
         axel
       ]
-      ++ (
-        let
-          myPkgs = import ../../pkgs { inherit pkgs; };
-        in
-        [
-          myPkgs.qemu-custom
-        ]
-      );
+      ++ [
+        qemu-custom
+      ];
     xdg.configFile."kitty/kitty.conf".source = ./kitty.conf;
   };
 }

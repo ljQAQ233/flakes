@@ -27,13 +27,19 @@
             ./nixos/configuration.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.overlays = [
+                (import ./pkgs)
+              ];
+            }
+            {
               home-manager = {
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 users.maouai233 = {
                   imports = [
                     ./home/home.nix
-                  ];
+                  ]
+                  ++ (import ./modules);
                 };
               };
             }
