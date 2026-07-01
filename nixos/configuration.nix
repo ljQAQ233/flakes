@@ -150,6 +150,7 @@
       imagemagick
       #
       git
+      lsof
       wget
       atool
       unzip
