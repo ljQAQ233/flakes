@@ -8,6 +8,7 @@ in
 {
   imports = mkImports [
     "fetch"
+    "games"
     "waybar"
     "hyprland"
   ];
