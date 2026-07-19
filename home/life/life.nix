@@ -3,15 +3,15 @@
   ...
 }:
 let
+  entries = builtins.readDir ./.;
+  filter = type: builtins.filter (n: entries.${n} == type) (builtins.attrNames entries);
+  mkSingles = str: map (x: ./. + "/${x}") str;
   mkImports = str: map (x: ./. + "/${x}/${x}.nix") str;
 in
 {
-  imports = mkImports [
-    "fetch"
-    "games"
-    "waybar"
-    "hyprland"
-  ];
+  imports =
+    mkImports (filter "directory")
+    ++ builtins.filter (f: baseNameOf f != "life.nix") (mkSingles (filter "regular"));
 
   programs.firefox = {
     enable = true;
