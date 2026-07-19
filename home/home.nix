@@ -43,6 +43,7 @@ in
     ./life/life.nix
     ./devel/agent.nix
     ./devel/devel.nix
+    ./bili.nix
   ];
 
   home.packages = with pkgs; [
