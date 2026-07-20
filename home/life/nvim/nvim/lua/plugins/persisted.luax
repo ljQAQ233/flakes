@@ -1,0 +1,37 @@
+return {
+  'olimorris/persisted.nvim',
+  event = 'BufReadPre',
+  enabled = false,
+  keys = {
+    { '<leader>r', ':Telescope persisted<CR>' },
+  },
+  opts = {
+    autostart = true, -- Automatically start the plugin on load?
+
+    -- Function to determine if a session should be saved
+    ---@type fun(): boolean
+    should_save = function()
+      return true
+    end,
+
+    save_dir = vim.fn.expand(vim.fn.stdpath('data') .. '/sessions/'),
+
+    follow_cwd = true,
+    use_git_branch = true,
+    autoload = false,
+
+    on_autoload_no_session = function() end,
+    telescope = {
+      mappings = { -- Mappings for managing sessions in Telescope
+        copy_session = '<C-c>',
+        change_branch = '<C-b>',
+        delete_session = '<C-d>',
+      },
+      icons = { -- icons displayed in the Telescope picker
+        selected = ' ',
+        dir = '  ',
+        branch = ' ',
+      },
+    },
+  },
+}
