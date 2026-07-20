@@ -15,13 +15,17 @@
       nixpkgs,
       home-manager,
       ...
-    }:
+    }@inputs:
     let
       system = "x86_64-linux";
+      flakeDir = "/home/maouai233/flakes/";
+      specialArgs = { inherit inputs flakeDir; };
+      extraSpecialArgs = { inherit inputs flakeDir; };
     in
     {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
           inherit system;
           modules = [
             ./nixos/configuration.nix
@@ -41,6 +45,7 @@
                   ]
                   ++ (import ./modules);
                 };
+                inherit extraSpecialArgs;
               };
             }
           ];
