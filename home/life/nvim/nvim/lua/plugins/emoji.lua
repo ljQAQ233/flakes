@@ -1,6 +1,6 @@
 return {
-  dir = '/home/maouai233/proj/emoji.nvim',
-  -- 'allaman/emoji.nvim',
+  -- dir = '/home/maouai233/proj/emoji.nvim',
+  'allaman/emoji.nvim',
   lazy = false,
   dependencies = {
     'nvim-telescope/telescope.nvim',
