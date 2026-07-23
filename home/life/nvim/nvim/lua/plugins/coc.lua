@@ -36,5 +36,15 @@ return {
     vim.cmd(
       [[ autocmd BufRead,BufNewFile coc-settings.json set filetype=jsonc ]]
     )
+    -- auto install extensions
+
+    vim.g.coc_global_extensions = {
+      'coc-marketplace',
+      'coc-git',
+      'coc-json',
+      'coc-clangd',
+      '@ph_chen/coc-nix',
+      '@statiolake/coc-sumneko-lua',
+    }
   end,
 }

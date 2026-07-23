@@ -1,13 +1,5 @@
 {
     "clangd.path": "clangd",
-    "extensions.recommendations": [
-        "coc-marketplace",
-        "coc-git",
-        "coc-json",
-        "coc-clangd",
-        "coc-lua",
-        "@statiolake/coc-sumneko-lua"
-    ],
     "git.enableGutters": true,
     "inlayHint.display": false,
     "inlayHint.enable": true,
@@ -56,5 +48,5 @@
     "translator.engines": [
         "youdao"
     ],
-    "translator.toLang": "zh_CN"
+    "translator.toLang": "zh_CN",
 }
