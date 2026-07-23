@@ -15,13 +15,13 @@
         clang-tools
         rustfmt
         rust-analyzer
-        nil
         nixd
         stylua
         yq
         jq
         yamlfmt
         nixfmt
+        prettier
         # env
         bun
         nodejs
