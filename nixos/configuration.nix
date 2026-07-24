@@ -112,6 +112,13 @@
   #   enable = true;
   # };
 
+  # cryption
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
   # user settings
   users.users.maouai233 = {
     isNormalUser = true;
