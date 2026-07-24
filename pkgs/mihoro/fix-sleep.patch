@@ -1,0 +1,13 @@
+diff --git a/src/mihoro.rs b/src/mihoro.rs
+index 3fe4851..7f34982 100644
+--- a/src/mihoro.rs
++++ b/src/mihoro.rs
+@@ -646,7 +646,7 @@ Type=simple
+ LimitNPROC=4096
+ LimitNOFILE=65536
+ Restart=always
+-ExecStartPre=/usr/bin/sleep 1s
++ExecStartPre=/usr/bin/env sleep 1s
+ ExecStart={} -d {}
+ ExecReload=/bin/kill -HUP $MAINPID
+ 

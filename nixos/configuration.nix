@@ -23,7 +23,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://127.0.0.1:7897";
+  networking.proxy.default = "http://127.0.0.1:7897";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain,mirrors.ustc.edu.cn";
 
   # Enable networking
@@ -162,7 +162,7 @@
       rofi
       yazi
       kitty
-      clash-verge-rev
+      mihoro
     ];
     sessionVariables = {
       # i18n
