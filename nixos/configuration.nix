@@ -12,6 +12,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
+    ./virtualisation.nix
     ./hardware-configuration.nix
   ];
 
@@ -181,23 +182,6 @@
       bash
       zsh
     ];
-  };
-
-  # vm
-  virtualisation = {
-    containers = {
-      enable = true;
-      registries = {
-        search = [
-          "docker.io"
-          "quay.io"
-        ];
-      };
-    };
-    podman = {
-      enable = true;
-      dockerCompat = true;
-    };
   };
 
   # gui
