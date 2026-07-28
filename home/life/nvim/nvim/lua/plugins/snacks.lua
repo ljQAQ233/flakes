@@ -1,5 +1,13 @@
 return {
   'folke/snacks.nvim',
+  keys = {
+    {
+      '<leader>1',
+      function()
+        require('snacks.image').hover()
+      end,
+    },
+  },
   config = function()
     require('snacks').setup({
       bigfile = { enabled = false },
@@ -7,7 +15,7 @@ return {
       explorer = { enabled = false },
       image = {
         doc = {
-          enabled = true,
+          enabled = false,
           inline = false,
           float = true,
           max_width = 80,
