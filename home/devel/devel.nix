@@ -40,6 +40,8 @@
         # utils
         gh
         axel
+        # crackme
+        ghidra
       ]
       ++ [
         qemu-custom

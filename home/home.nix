@@ -36,6 +36,7 @@ in
     };
   home.sessionVariables = {
     WALLPAPERS = config.xdg.userDirs.pictures + "/wallpaper";
+    JAVA_TOOL_OPTIONS = "-Dflatlaf.uiScale=1.6";
   };
 
   imports = [
