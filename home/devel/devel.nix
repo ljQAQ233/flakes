@@ -15,6 +15,7 @@
         clang-tools
         rustfmt
         rust-analyzer
+        uncrustify-edk2
         nixd
         stylua
         yq
@@ -39,6 +40,7 @@
         man-pages-posix
         # utils
         gh
+        bat
         axel
         # crackme
         ghidra
